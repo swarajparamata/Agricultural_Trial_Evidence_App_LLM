@@ -1,0 +1,26 @@
+[project]
+name = "agritrial-llm"
+version = "1.0.0"
+description = "LangGraph agent service (LangChain + Ollama/Qwen 3.6) for the AgriEvidence trial app"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.143.0",
+    "uvicorn[standard]==0.54.0",
+    "pydantic==2.14.0",
+    "pydantic-settings==2.15.0",
+    "langchain-core==1.6.8",
+    "langchain-ollama==1.1.0",
+    "langgraph==1.2.14",
+    "httpx==0.28.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1"]
+
+[tool.setuptools]
+packages = ["agritrial_llm"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

@@ -1,0 +1,11 @@
+fastapi==0.143.0
+uvicorn[standard]==0.54.0
+pydantic==2.14.0
+pydantic-settings==2.15.0
+langchain-core==1.6.8
+langchain-ollama==1.1.0
+langgraph==1.2.14
+httpx==0.28.1
+
+# tests
+pytest==9.1.1

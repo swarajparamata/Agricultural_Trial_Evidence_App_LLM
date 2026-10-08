@@ -1,0 +1,110 @@
+{
+  "display_unit": "t/ha",
+  "reference": {
+    "crops": [
+      {"name": "Wheat", "aliases": []},
+      {"name": "Potato", "aliases": ["Potatoes"]},
+      {"name": "Maize", "aliases": ["Corn"]}
+    ],
+    "products": [
+      {"name": "Harvest Plus", "aliases": ["HarvestPlus", "HARVESTPLUS"]},
+      {"name": "Root Boost", "aliases": ["RootBoost", "ROOTBOOST"]}
+    ],
+    "countries": [
+      {"name": "France", "code": "FR", "aliases": []},
+      {"name": "Germany", "code": "DE", "aliases": ["Deutschland"]},
+      {"name": "Spain", "code": "ES", "aliases": []},
+      {"name": "Italy", "code": "IT", "aliases": []}
+    ],
+    "trial_types": [
+      {"name": "Scientific", "aliases": ["Research"]},
+      {"name": "Demonstration", "aliases": ["Demo"]},
+      {"name": "Commercial", "aliases": []}
+    ],
+    "custom_fields": [
+      {"key": "soil_type", "label": "Soil type", "type": "select", "options": ["Clay", "Loam", "Sandy", "Silt"]}
+    ]
+  },
+  "trials": [
+    {
+      "id": "T01", "crop": "Wheat", "product": "Harvest Plus", "country": "France", "year": 2023, "trial_type": "Scientific",
+      "treatment_yield": 8.4, "control_yield": 8.0, "yield_unit": "t/ha", "yield_difference": 0.4, "uplift_pct": 5.0,
+      "status": "consistent", "caveats": [], "conflicts": [], "missing_fields": [],
+      "sources": [
+        {"file": "trials_a.csv", "kind": "csv", "locator": "row 2", "values": {"crop": "Wheat", "product": "Harvest Plus", "country": "France", "year": "2023", "trial_type": "Scientific", "treatment_yield": "8.4 t/ha", "control_yield": "8.0 t/ha"}},
+        {"file": "trials_b.csv", "kind": "csv", "locator": "row 2", "values": {"crop": "wheat", "product": "HarvestPlus", "country": "FR", "year": "2023", "trial_type": "scientific", "treatment_yield": "8400 kg/ha", "control_yield": "8000 kg/ha"}}
+      ],
+      "notes": [], "custom_fields": {}
+    },
+    {
+      "id": "T02", "crop": "Wheat", "product": "Harvest Plus", "country": "Germany", "year": 2024, "trial_type": "Demonstration",
+      "treatment_yield": 7.8, "control_yield": 7.5, "yield_unit": "t/ha", "yield_difference": 0.3, "uplift_pct": 4.0,
+      "status": "consistent",
+      "caveats": ["Replication not documented", "Statistical analysis not documented", "Single demonstration site"],
+      "conflicts": [], "missing_fields": [],
+      "sources": [
+        {"file": "trials_a.csv", "kind": "csv", "locator": "row 3", "values": {"crop": "wheat", "product": "HARVESTPLUS", "country": "DE", "year": "2024", "trial_type": "Demonstration", "treatment_yield": "7800 kg/ha", "control_yield": "7500 kg/ha"}},
+        {"file": "T02_field_report.txt", "kind": "report", "locator": "report", "values": {"crop": "Wheat", "product": "HarvestPlus", "country": "Germany", "year": "2024", "trial_type": "Demonstration", "treatment_yield": "7.8 t/ha", "control_yield": "7.5 t/ha"}}
+      ],
+      "notes": [{"source": "T02_field_report.txt", "text": "One demonstration site. Replication and statistical significance are not documented."}],
+      "custom_fields": {}
+    },
+    {
+      "id": "T03", "crop": "Potato", "product": "Root Boost", "country": "Spain", "year": 2023, "trial_type": "Demonstration",
+      "treatment_yield": 42.0, "control_yield": 40.0, "yield_unit": "t/ha", "yield_difference": 2.0, "uplift_pct": 5.0,
+      "uplift_range": [5.0, 10.0],
+      "status": "conflict",
+      "caveats": ["Conflicting treated yield between sources"],
+      "conflicts": [
+        {"field": "treatment_yield", "label": "Treated yield", "status": "open", "chosen_display": "42 t/ha",
+         "candidates": [
+           {"value": 42.0, "display": "42 t/ha", "sources": ["trials_a.csv"]},
+           {"value": 44.0, "display": "44 t/ha", "sources": ["T03_summary.txt"]}
+         ]}
+      ],
+      "missing_fields": [],
+      "sources": [
+        {"file": "trials_a.csv", "kind": "csv", "locator": "row 4", "values": {"crop": "Potato", "product": "Root Boost", "country": "Spain", "year": "2023", "trial_type": "Demonstration", "treatment_yield": "42 t/ha", "control_yield": "40 t/ha"}},
+        {"file": "T03_summary.txt", "kind": "report", "locator": "report", "values": {"crop": "Potato", "product": "RootBoost", "country": "Spain", "year": "2023", "trial_type": "Demonstration", "treatment_yield": "44 t/ha", "control_yield": "40 t/ha"}}
+      ],
+      "notes": [{"source": "T03_summary.txt", "text": "This report and the spreadsheet give different treated yields. Neither source indicates which result is final."}],
+      "custom_fields": {}
+    },
+    {
+      "id": "T04", "crop": "Potato", "product": "Root Boost", "country": "France", "year": 2024, "trial_type": "Scientific",
+      "treatment_yield": 45.0, "control_yield": 45.0, "yield_unit": "t/ha", "yield_difference": 0.0, "uplift_pct": 0.0,
+      "status": "consistent",
+      "caveats": ["Replication not documented", "Statistical analysis not documented"],
+      "conflicts": [], "missing_fields": [],
+      "sources": [
+        {"file": "trials_b.csv", "kind": "csv", "locator": "row 3", "values": {"crop": "potatoes", "product": "ROOTBOOST", "country": "FR", "year": "2024", "trial_type": "scientific", "treatment_yield": "45000 kg/ha", "control_yield": "45000 kg/ha"}},
+        {"file": "T04_scientific_report.txt", "kind": "report", "locator": "report", "values": {"crop": "Potatoes", "product": "Root Boost", "country": "France", "year": "2024", "trial_type": "Scientific", "treatment_yield": "45 t/ha", "control_yield": "45 t/ha"}}
+      ],
+      "notes": [{"source": "T04_scientific_report.txt", "text": "The recorded yields are equal. Replication details and statistical analysis are unavailable in this extract."}],
+      "custom_fields": {}
+    },
+    {
+      "id": "T05", "crop": "Wheat", "product": "Harvest Plus", "country": "Germany", "year": 2025, "trial_type": "Demonstration",
+      "treatment_yield": 8.1, "control_yield": null, "yield_unit": "t/ha", "yield_difference": null, "uplift_pct": null,
+      "status": "incomplete",
+      "caveats": ["Control yield missing – uplift cannot be calculated", "Reported by a single source"],
+      "conflicts": [], "missing_fields": ["control_yield"],
+      "sources": [
+        {"file": "trials_b.csv", "kind": "csv", "locator": "row 4", "values": {"crop": "WHEAT", "product": "Harvest Plus", "country": "DE", "year": "2025", "trial_type": "demonstration", "treatment_yield": "8100 kg/ha"}}
+      ],
+      "notes": [], "custom_fields": {}
+    },
+    {
+      "id": "T06", "crop": "Wheat", "product": "Harvest Plus", "country": "Spain", "year": 2021, "trial_type": "Scientific",
+      "treatment_yield": 6.6, "control_yield": 6.0, "yield_unit": "t/ha", "yield_difference": 0.6, "uplift_pct": 10.0,
+      "status": "single_source",
+      "caveats": ["Reported by a single source", "Replication not documented", "Statistical analysis not documented"],
+      "conflicts": [], "missing_fields": [],
+      "sources": [
+        {"file": "T06_archive_note.txt", "kind": "report", "locator": "report", "values": {"crop": "Wheat", "product": "Harvest Plus", "country": "Spain", "year": "2021", "trial_type": "Scientific", "treatment_yield": "6.6 t/ha", "control_yield": "6.0 t/ha"}}
+      ],
+      "notes": [{"source": "T06_archive_note.txt", "text": "This trial appears only in the archive note. Replication details and statistical analysis are unavailable in this extract."}],
+      "custom_fields": {}
+    }
+  ]
+}

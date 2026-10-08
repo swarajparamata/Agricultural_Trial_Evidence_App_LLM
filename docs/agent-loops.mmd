@@ -1,0 +1,9 @@
+flowchart LR
+    Q([question]) --> agent
+    agent -- tool calls --> tools
+    tools -- results --> agent
+    agent -- draft answer --> verify
+    verify -- problems --> revise
+    revise -- reviewer feedback --> agent
+    verify -- pass, or limit reached --> finalize
+    finalize --> A([answer + trace])
